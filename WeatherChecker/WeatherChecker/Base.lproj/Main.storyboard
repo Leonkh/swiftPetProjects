@@ -16,14 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Input name of city" translatesAutoresizingMaskIntoConstraints="NO" id="Rcf-AY-icS">
+                            <searchBar contentMode="redraw" placeholder="Input name of city" translatesAutoresizingMaskIntoConstraints="NO" id="Rcf-AY-icS">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7o4-xx-Gtz"/>
+                                </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LTz-Zm-qMd">
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LTz-Zm-qMd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -32,6 +33,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rcf-AY-icS" firstAttribute="trailing" secondItem="LTz-Zm-qMd" secondAttribute="trailing" id="6Ng-7A-7AL"/>
+                            <constraint firstItem="Rcf-AY-icS" firstAttribute="leading" secondItem="LTz-Zm-qMd" secondAttribute="leading" id="BYz-4E-AmF"/>
+                            <constraint firstItem="LTz-Zm-qMd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="V0z-uw-hiU"/>
+                            <constraint firstItem="Rcf-AY-icS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X3m-0G-ORq"/>
+                            <constraint firstItem="Rcf-AY-icS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aUv-3f-gxD"/>
+                            <constraint firstItem="LTz-Zm-qMd" firstAttribute="top" secondItem="Rcf-AY-icS" secondAttribute="bottom" id="d7E-c1-isy"/>
+                            <constraint firstItem="Rcf-AY-icS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="p5K-jp-JEU"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="Rcf-AY-icS" id="Gzg-Qj-E06"/>
