@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CCDB609B9DAD01F9F684EC0 /* Pods_WeatherChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F0D185E7A1B95F94770E10 /* Pods_WeatherChecker.framework */; };
+		B04786CB256921E0009AE84F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04786CA256921E0009AE84F /* MapViewController.swift */; };
 		B0C511BA2567FDF20044E5E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C511B92567FDF20044E5E4 /* AppDelegate.swift */; };
 		B0C511BC2567FDF20044E5E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C511BB2567FDF20044E5E4 /* SceneDelegate.swift */; };
 		B0C511BE2567FDF20044E5E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C511BD2567FDF20044E5E4 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		09F0D185E7A1B95F94770E10 /* Pods_WeatherChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB31FEE9B1CB6E59B62C6D /* Pods-WeatherChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherChecker.release.xcconfig"; path = "Target Support Files/Pods-WeatherChecker/Pods-WeatherChecker.release.xcconfig"; sourceTree = "<group>"; };
+		B04786CA256921E0009AE84F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B0C511B62567FDF20044E5E4 /* WeatherChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C511B92567FDF20044E5E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0C511BB2567FDF20044E5E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				B0C511C22567FDF80044E5E4 /* Assets.xcassets */,
 				B0C511C42567FDF80044E5E4 /* LaunchScreen.storyboard */,
 				B0C511C72567FDF80044E5E4 /* Info.plist */,
+				B04786CA256921E0009AE84F /* MapViewController.swift */,
 			);
 			path = WeatherChecker;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0C511DF256810190044E5E4 /* Weather.swift in Sources */,
+				B04786CB256921E0009AE84F /* MapViewController.swift in Sources */,
 				B0C511E3256815C20044E5E4 /* Weathers.swift in Sources */,
 				B0C511BE2567FDF20044E5E4 /* ViewController.swift in Sources */,
 				B0C511BA2567FDF20044E5E4 /* AppDelegate.swift in Sources */,
