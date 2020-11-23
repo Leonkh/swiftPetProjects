@@ -43,7 +43,8 @@ class ViewController: UIViewController, UITextViewDelegate {
     func getWeatherInfo(cityName: String) {
         let string = cityName
         let replaced = (string as NSString).replacingOccurrences(of: " ", with: "+")
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(replaced)&lang=ru&units=metric&appid=\(apiKey!)"
+        let replaced2 = (replaced as NSString).replacingOccurrences(of: "-", with: "+")
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(replaced2)&lang=ru&units=metric&appid=\(apiKey!)"
         AF.request(url, method: .get).validate().responseJSON { [weak self] (response) in
             switch response.result {
             case .success(let value):

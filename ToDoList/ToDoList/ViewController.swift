@@ -4,11 +4,16 @@
 //
 //  Created by Леонид Хабибуллин on 22.11.2020.
 //
+<<<<<<< HEAD
 import CoreData
+=======
+
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 import UIKit
 
 class ViewController: UIViewController {
 
+<<<<<<< HEAD
     @IBOutlet var tableView: UITableView!
     
     var tasks: [NSManagedObject] = []
@@ -83,3 +88,13 @@ extension ViewController: UITableViewDataSource {
     
     
 }
+=======
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+
+
+}
+
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79

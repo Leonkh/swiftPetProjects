@@ -14,7 +14,10 @@
 		B018A283256A81F300816250 /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B018A281256A81F300816250 /* ToDoList.xcdatamodeld */; };
 		B018A285256A81F700816250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B018A284256A81F700816250 /* Assets.xcassets */; };
 		B018A288256A81F700816250 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B018A286256A81F700816250 /* LaunchScreen.storyboard */; };
+<<<<<<< HEAD
 		B018A292256A829900816250 /* CellTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B018A291256A829900816250 /* CellTask.swift */; };
+=======
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +30,10 @@
 		B018A284256A81F700816250 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B018A287256A81F700816250 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B018A289256A81F700816250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		B018A291256A829900816250 /* CellTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTask.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +70,10 @@
 				B018A27A256A81F300816250 /* SceneDelegate.swift */,
 				B018A27C256A81F300816250 /* ViewController.swift */,
 				B018A27E256A81F300816250 /* Main.storyboard */,
+<<<<<<< HEAD
 				B018A291256A829900816250 /* CellTask.swift */,
+=======
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 				B018A284256A81F700816250 /* Assets.xcassets */,
 				B018A286256A81F700816250 /* LaunchScreen.storyboard */,
 				B018A289256A81F700816250 /* Info.plist */,
@@ -145,7 +154,10 @@
 			files = (
 				B018A27D256A81F300816250 /* ViewController.swift in Sources */,
 				B018A279256A81F300816250 /* AppDelegate.swift in Sources */,
+<<<<<<< HEAD
 				B018A292256A829900816250 /* CellTask.swift in Sources */,
+=======
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 				B018A27B256A81F300816250 /* SceneDelegate.swift in Sources */,
 				B018A283256A81F300816250 /* ToDoList.xcdatamodeld in Sources */,
 			);
@@ -304,7 +316,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = futurum.ToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+<<<<<<< HEAD
 				TARGETED_DEVICE_FAMILY = 1;
+=======
+				TARGETED_DEVICE_FAMILY = "1,2";
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 			};
 			name = Debug;
 		};
@@ -323,7 +339,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = futurum.ToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+<<<<<<< HEAD
 				TARGETED_DEVICE_FAMILY = 1;
+=======
+				TARGETED_DEVICE_FAMILY = "1,2";
+>>>>>>> 0d539447d70eb35da603b44864bb954ff9b0ce79
 			};
 			name = Release;
 		};
