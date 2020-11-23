@@ -14,6 +14,8 @@
 		B0ACAEED256BF8E9009C5B2F /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0ACAEEB256BF8E9009C5B2F /* ToDoList.xcdatamodeld */; };
 		B0ACAEEF256BF8EE009C5B2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0ACAEEE256BF8EE009C5B2F /* Assets.xcassets */; };
 		B0ACAEF2256BF8EE009C5B2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0ACAEF0256BF8EE009C5B2F /* LaunchScreen.storyboard */; };
+		B0ACAEFC256C32E7009C5B2F /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACAEFB256C32E7009C5B2F /* TaskViewController.swift */; };
+		B0ACAEFF256C35BA009C5B2F /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACAEFE256C35BA009C5B2F /* TaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		B0ACAEEE256BF8EE009C5B2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0ACAEF1256BF8EE009C5B2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0ACAEF3256BF8EE009C5B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0ACAEFB256C32E7009C5B2F /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		B0ACAEFE256C35BA009C5B2F /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 				B0ACAEE4256BF8E9009C5B2F /* SceneDelegate.swift */,
 				B0ACAEE6256BF8E9009C5B2F /* ViewController.swift */,
 				B0ACAEE8256BF8E9009C5B2F /* Main.storyboard */,
+				B0ACAEFE256C35BA009C5B2F /* TaskCell.swift */,
+				B0ACAEFB256C32E7009C5B2F /* TaskViewController.swift */,
 				B0ACAEEE256BF8EE009C5B2F /* Assets.xcassets */,
 				B0ACAEF0256BF8EE009C5B2F /* LaunchScreen.storyboard */,
 				B0ACAEF3256BF8EE009C5B2F /* Info.plist */,
@@ -142,7 +148,9 @@
 			files = (
 				B0ACAEE7256BF8E9009C5B2F /* ViewController.swift in Sources */,
 				B0ACAEE3256BF8E9009C5B2F /* AppDelegate.swift in Sources */,
+				B0ACAEFC256C32E7009C5B2F /* TaskViewController.swift in Sources */,
 				B0ACAEE5256BF8E9009C5B2F /* SceneDelegate.swift in Sources */,
+				B0ACAEFF256C35BA009C5B2F /* TaskCell.swift in Sources */,
 				B0ACAEED256BF8E9009C5B2F /* ToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
