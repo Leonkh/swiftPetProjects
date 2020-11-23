@@ -76,8 +76,12 @@ class ViewController: UITableViewController {
     
     @objc func addNewTask() {
         let ac = UIAlertController(title: "Create new task", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        ac.addTextField()
+        ac.addTextField { (textField) in
+            textField.placeholder = "Input name of task"
+        }
+        ac.addTextField { (textField) in
+            textField.placeholder = "Input text of task"
+        }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let ok = UIAlertAction(title: "OK", style: .default, handler: {
             [weak self] _ in
