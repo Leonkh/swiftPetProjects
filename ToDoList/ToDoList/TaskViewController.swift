@@ -14,7 +14,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var taskNameTextView: UITextView!
     @IBOutlet var taskNameLabel: UILabel!
     
-    var task: NSObject?
+    var task: NSManagedObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,10 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         
         notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        let deleteButtom = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target: self, action: #selector(deleteTask))
+        toolbarItems = [deleteButtom]
+        navigationController?.setToolbarHidden(false, animated: false)
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -112,6 +116,29 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
+    }
+    
+    
+    @objc func deleteTask() {
+        let ac = UIAlertController(title: "Do you want delete this task?", message: nil, preferredStyle: .alert)
+        let yes = UIAlertAction(title: "Yes", style: .default, handler: {
+            [weak self] _ in
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            managedContext.delete((self?.task)!)
+            do {
+                try  managedContext.save()
+                self?.navigationController?.popViewController(animated: true)
+                self?.dismiss(animated: true)
+            } catch {
+                print("Cant save delete change")
+            }
+        })
+        let no = UIAlertAction(title: "No", style: .cancel)
+        ac.addAction(no)
+        ac.addAction(yes)
+        present(ac, animated: true)
     }
     
 }

@@ -45,43 +45,36 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell // инициализируем нашу кастомную ячейку
-        //        cell.delegate = self
-        //        print("Ячейка создана")
         cell.nameOfTaskLabel.text = tasks[indexPath.row].value(forKeyPath: "nameOfTask") as! String // присваевыем текст в nameOfTasklabel равный сохраненному имени
         cell.taskTextLabel.text = tasks[indexPath.row].value(forKeyPath: "descriptionTask") as! String // присваевыем текст в taskTextlabel равный сохраненному описанию таска
-        cell.nameOfTaskLabel.sizeToFit()
-        cell.taskTextLabel.sizeToFit()
-//        cell.taskTextLabel.
+//        cell.nameOfTaskLabel.sizeToFit()
+//        cell.taskTextLabel.sizeToFit()
         let status = tasks[indexPath.row].value(forKeyPath: "statusTask") as! Bool // считываем статус таска
         cell.statusTask.layer.cornerRadius = 5 // закругление краев кнопки
         cell.statusTask.layer.borderWidth = 3.0 // толщина краев кнопки
         cell.statusTask.layer.borderColor = UIColor.lightGray.cgColor // цвет краев кнопки
         if status {
             if let galochka = UIImage(named: "checkmark") {// если выполнен таск показать галочку
-                //            cell.statusTask.imageView?.image = galochka
                 cell.statusTask.setImage(galochka, for: .normal)
-                print("Галочка поставилась")
             }
-        } else {
+        } else { // если таск не выполнен то пустое поле
             cell.statusTask.setImage(nil, for: .normal)
         }
-        cell.statusTask.tag = indexPath.row
+        cell.statusTask.tag = indexPath.row // таг кнопки равен номеру ячейки
         if let butt = cell.statusTask as? UIButton {
             let intt = indexPath.row
-            butt.addTarget(self, action: #selector(changeStatus(sender:)), for: .touchUpInside)
+            butt.addTarget(self, action: #selector(changeStatus(sender:)), for: .touchUpInside) // меняем статус таска при нажатии
         }
-        //            cell.statusTask.backgroundColor = .white
-        //        }
         
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let tvc = storyboard?.instantiateViewController(withIdentifier: "TaskViewController") as? TaskViewController else {return}
         tvc.task = tasks[indexPath.row] // передаем task
-        navigationController?.pushViewController(tvc, animated: true)
+        navigationController?.pushViewController(tvc, animated: true) // переходим в tvc
     }
     
-    @objc func addNewTask() {
+    @objc func addNewTask() { // функция создания таска
         let ac = UIAlertController(title: "Create new task", message: nil, preferredStyle: .alert)
         ac.addTextField { (textField) in
             textField.placeholder = "Input name of task"
@@ -136,6 +129,7 @@ class ViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        viewDidLoad()
         tableView.reloadData()
     }
     

@@ -16,8 +16,6 @@ class TaskCell: UITableViewCell {
     @IBOutlet var taskTextLabel: UILabel!
     
     @IBAction func taskStatusTapped(_ sender: UIButton) {
-//        self.delegate?.customCell(self, didPressButton: sender)
-        print("Нажатие кнопки зафиксировано")
     }
     
 }
