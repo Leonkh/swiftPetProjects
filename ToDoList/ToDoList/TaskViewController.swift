@@ -28,6 +28,18 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         taskTextView.delegate = self
         taskTextView.tag = 1
         
+        taskNameLabel.layer.borderColor = UIColor.lightGray.cgColor
+        taskTextView.layer.borderColor = UIColor.lightGray.cgColor
+        taskNameTextView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        taskNameLabel.layer.borderWidth = 3
+        taskTextView.layer.borderWidth = 3
+        taskNameTextView.layer.borderWidth = 3
+        
+        taskNameLabel.layer.cornerRadius = 5
+        taskTextView.layer.cornerRadius = 5
+        taskNameTextView.layer.cornerRadius = 5
+        
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil) // ремонт клавиатуры
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil) // ремонт клавиатуры
