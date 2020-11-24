@@ -5,11 +5,9 @@
 //  Created by Леонид Хабибуллин on 23.11.2020.
 //
 import CoreData
+import LocalAuthentication
 import UIKit
 
-//protocol CustomCellDelegate: class {
-//    func customCell(_ cell: TaskCell, didPressButton: UIButton)
-//}
 private var tasks: [NSManagedObject] = [] // создаем массив наших тасков
 
 class ViewController: UITableViewController {
@@ -34,6 +32,10 @@ class ViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask)) // кнопка в Navigation Bar для добавления тасков
         
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
         
     }
     
@@ -55,9 +57,9 @@ class ViewController: UITableViewController {
         cell.statusTask.layer.borderColor = UIColor.lightGray.cgColor // цвет краев кнопки
         if status {
             if let galochka = UIImage(named: "checkmark") {// если выполнен таск показать галочку
-//            cell.statusTask.imageView?.image = galochka
+                //            cell.statusTask.imageView?.image = galochka
                 cell.statusTask.setImage(galochka, for: .normal)
-            print("Галочка поставилась")
+                print("Галочка поставилась")
             }
         } else {
             cell.statusTask.setImage(nil, for: .normal)
@@ -136,20 +138,43 @@ class ViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @objc func hideAll() {
+        guard view.isHidden == false else {return}
+        view.isHidden = true
+        title = "You must pass authentication"
+    }
+    
+    @objc func openAll() {
+        guard view.isHidden == true else {return}
+        let contex = LAContext() // объект LA. Error в LA это часть Obj-C, а не Swift
+        var error: NSError?
+        
+        if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, authencticationError in
+                DispatchQueue.main.async {
+                    if success {
+                        self?.view.isHidden = false
+                        self?.title = ""
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "You cann't be verified. Please, try again", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(ac, animated: true)
+                    }
+                }
+            }
+            
+        } else {
+            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
 }
-
-//extension ViewController: CustomCellDelegate {
-//    // You get notified by the cell instance and the button when it was pressed
-//    func customCell(_ cell: TaskCell, didPressButton: UIButton) {
-//        // Get the indexPath
-////        didPressButton.backgroundColor = .red
-//        if let indexPathRow = tableView.indexPath(for: cell)?.row {
-//        let lastStatus = tasks[indexPathRow].value(forKeyPath: "statusTask") as! Bool
-//        tasks[indexPathRow].setValue(!lastStatus, forKeyPath: "statusTask")
-//        tableView.reloadData()
-//        } else {
-//            print("Нажатие кнопки зафиксировано, но индекс не прошел")
-//        }
-//    }
-//}
-

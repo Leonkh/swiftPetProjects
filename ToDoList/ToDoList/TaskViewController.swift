@@ -5,6 +5,7 @@
 //  Created by Леонид Хабибуллин on 23.11.2020.
 //
 import CoreData
+import LocalAuthentication
 import UIKit
 
 class TaskViewController: UIViewController, UITextViewDelegate {
@@ -30,6 +31,9 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil) // ремонт клавиатуры
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil) // ремонт клавиатуры
+        
+        notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -56,6 +60,46 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         
         let selectedRange = taskTextView.selectedRange
         taskTextView.scrollRangeToVisible(selectedRange)
+    }
+    
+    @objc func hideAll() {
+        guard view.isHidden == false else {return}
+        view.isHidden = true
+        title = "You must pass authentication"
+    }
+    
+    @objc func openAll() {
+        guard view.isHidden == true else {return}
+        let contex = LAContext() // объект LA. Error в LA это часть Obj-C, а не Swift
+        var error: NSError?
+        
+        if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, authencticationError in
+                DispatchQueue.main.async {
+                    if success {
+                        self?.view.isHidden = false
+                        self?.title = ""
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "You cann't be verified. Please, try again", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(ac, animated: true)
+                    }
+                }
+            }
+            
+        } else {
+            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
     }
     
 }

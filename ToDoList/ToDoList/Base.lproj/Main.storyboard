@@ -73,14 +73,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ecK-WE-qjr">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ecK-WE-qjr">
                                 <rect key="frame" x="122" y="44" width="272" height="80"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWy-3I-eij">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWy-3I-eij">
                                 <rect key="frame" x="20" y="44" width="94" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="BFk-qd-Cxj"/>
