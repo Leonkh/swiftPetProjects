@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,6 +65,64 @@
             </objects>
             <point key="canvasLocation" x="885.50724637681162" y="91.741071428571431"/>
         </scene>
+        <!--TaskViewController-->
+        <scene sceneID="GPd-Li-9CH">
+            <objects>
+                <viewController storyboardIdentifier="TaskViewController" title="TaskViewController" id="wSn-gc-ZLN" customClass="TaskViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0iK-Zy-oEn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ecK-WE-qjr">
+                                <rect key="frame" x="122" y="44" width="272" height="80"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWy-3I-eij">
+                                <rect key="frame" x="20" y="44" width="94" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="BFk-qd-Cxj"/>
+                                    <constraint firstAttribute="width" constant="94" id="pgj-3W-IMB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="wL6-xe-GDo">
+                                <rect key="frame" x="20" y="132" width="374" height="730"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="flh-gH-Ze8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ecK-WE-qjr" firstAttribute="leading" secondItem="XWy-3I-eij" secondAttribute="trailing" constant="8" id="6Oq-tW-4cR"/>
+                            <constraint firstItem="XWy-3I-eij" firstAttribute="top" secondItem="ecK-WE-qjr" secondAttribute="top" id="9Kj-P9-bQo"/>
+                            <constraint firstItem="XWy-3I-eij" firstAttribute="top" secondItem="flh-gH-Ze8" secondAttribute="top" id="IGZ-ty-lrb"/>
+                            <constraint firstItem="ecK-WE-qjr" firstAttribute="trailing" secondItem="0iK-Zy-oEn" secondAttribute="trailingMargin" id="Ohi-kg-L9s"/>
+                            <constraint firstItem="wL6-xe-GDo" firstAttribute="top" secondItem="XWy-3I-eij" secondAttribute="bottom" constant="8" id="T0l-AY-sef"/>
+                            <constraint firstItem="ecK-WE-qjr" firstAttribute="trailing" secondItem="wL6-xe-GDo" secondAttribute="trailing" id="auG-0w-GvT"/>
+                            <constraint firstItem="XWy-3I-eij" firstAttribute="leading" secondItem="0iK-Zy-oEn" secondAttribute="leadingMargin" id="c3p-Je-uyV"/>
+                            <constraint firstItem="wL6-xe-GDo" firstAttribute="bottom" secondItem="flh-gH-Ze8" secondAttribute="bottom" id="oSC-G2-d48"/>
+                            <constraint firstItem="XWy-3I-eij" firstAttribute="leading" secondItem="wL6-xe-GDo" secondAttribute="leading" id="oo3-QH-cwE"/>
+                            <constraint firstItem="XWy-3I-eij" firstAttribute="bottom" secondItem="ecK-WE-qjr" secondAttribute="bottom" id="svc-Wb-GXt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="taskNameLabel" destination="XWy-3I-eij" id="xYs-C4-mHs"/>
+                        <outlet property="taskNameTextView" destination="ecK-WE-qjr" id="oSm-yq-CaZ"/>
+                        <outlet property="taskTextView" destination="wL6-xe-GDo" id="vfk-vo-D2g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xQ-bc-rNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1643.4782608695652" y="93.75"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="N0d-ph-zOQ">
             <objects>
@@ -84,6 +143,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

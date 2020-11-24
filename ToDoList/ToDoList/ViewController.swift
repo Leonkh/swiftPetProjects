@@ -10,10 +10,9 @@ import UIKit
 //protocol CustomCellDelegate: class {
 //    func customCell(_ cell: TaskCell, didPressButton: UIButton)
 //}
+private var tasks: [NSManagedObject] = [] // создаем массив наших тасков
 
 class ViewController: UITableViewController {
-    
-    var tasks: [NSManagedObject] = [] // создаем массив наших тасков
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +72,11 @@ class ViewController: UITableViewController {
         
         return cell
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let tvc = storyboard?.instantiateViewController(withIdentifier: "TaskViewController") as? TaskViewController else {return}
+        tvc.task = tasks[indexPath.row] // передаем task
+        navigationController?.pushViewController(tvc, animated: true)
+    }
     
     @objc func addNewTask() {
         let ac = UIAlertController(title: "Create new task", message: nil, preferredStyle: .alert)
@@ -128,6 +132,9 @@ class ViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
 }
 
