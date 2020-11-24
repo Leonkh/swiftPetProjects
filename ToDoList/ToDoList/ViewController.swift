@@ -36,7 +36,7 @@ class ViewController: UITableViewController {
         notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-        
+        completedTaskBottom()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,8 +61,7 @@ class ViewController: UITableViewController {
             cell.statusTask.setImage(nil, for: .normal)
         }
         cell.statusTask.tag = indexPath.row // таг кнопки равен номеру ячейки
-        if let butt = cell.statusTask as? UIButton {
-            let intt = indexPath.row
+        if let butt = cell.statusTask {
             butt.addTarget(self, action: #selector(changeStatus(sender:)), for: .touchUpInside) // меняем статус таска при нажатии
         }
         
@@ -118,19 +117,19 @@ class ViewController: UITableViewController {
     
     @objc func changeStatus(sender: UIButton) {
         
-        //        sender.backgroundColor = .red
         print(sender.tag)
         let numb = sender.tag
         let lastStatus = tasks[numb].value(forKeyPath: "statusTask") as! Bool
-        print("Статус перед измением: \(lastStatus)")
+        print(lastStatus)
         tasks[numb].setValue(!lastStatus, forKeyPath: "statusTask")
-        print("Статус после измения: \(tasks[numb].value(forKeyPath: "statusTask") as! Bool)")
-        tableView.reloadData()
+        print(tasks[numb].value(forKeyPath: "statusTask") as! Bool)
+        saveChages()
+        completedTaskBottom()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewDidLoad()
-        tableView.reloadData()
+        completedTaskBottom()
     }
     
     @objc func hideAll() {
@@ -172,4 +171,39 @@ class ViewController: UITableViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
+//    func taskComplete(indexTask: Int) {
+//        let completedTask = tasks[indexTask]
+//        tasks.remove(at: indexTask)
+//        tasks.append(completedTask)
+//        saveChages()
+//        tableView.reloadData()
+//    }
+    
+    func completedTaskBottom() {
+        for task in tasks {
+            if task.value(forKeyPath: "statusTask") as! Bool == true {
+                let swapTask = task
+                guard let index = tasks.firstIndex(of: task) else {return }
+                tasks.remove(at: index)
+                tasks.append(swapTask)
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func saveChages() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        do {
+            try  managedContext.save()
+            print("Данные сохранены")
+        } catch {
+            print("Cant save delete change")
+    }
 }
+}
+
+
