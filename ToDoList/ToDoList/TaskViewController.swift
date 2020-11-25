@@ -47,9 +47,19 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
         
+        
         let deleteButtom = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target: self, action: #selector(deleteTask))
         toolbarItems = [deleteButtom]
         navigationController?.setToolbarHidden(false, animated: false)
+        
+        let tapper = UITapGestureRecognizer(target: self, action:#selector(endEditing))
+            tapper.cancelsTouchesInView = false
+            view.addGestureRecognizer(tapper)
+    }
+    
+    @objc func endEditing (_ sender: UITapGestureRecognizer) {
+        taskTextView.resignFirstResponder()
+        taskNameTextView.resignFirstResponder()
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -77,6 +87,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         let selectedRange = taskTextView.selectedRange
         taskTextView.scrollRangeToVisible(selectedRange)
     }
+ 
     
     @objc func hideAll() {
         guard view.isHidden == false else {return}
@@ -141,4 +152,11 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         present(ac, animated: true)
     }
     
+    
+}
+
+extension TaskViewController {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
