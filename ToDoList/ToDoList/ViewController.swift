@@ -47,8 +47,9 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell // инициализируем нашу кастомную ячейку
         cell.nameOfTaskLabel.text = tasks[indexPath.row].value(forKeyPath: "nameOfTask") as! String // присваевыем текст в nameOfTasklabel равный сохраненному имени
         cell.taskTextLabel.text = tasks[indexPath.row].value(forKeyPath: "descriptionTask") as! String // присваевыем текст в taskTextlabel равный сохраненному описанию таска
-//        cell.nameOfTaskLabel.sizeToFit()
-//        cell.taskTextLabel.sizeToFit()
+        cell.nameOfTaskLabel.sizeToFit()
+//        cell.taskTextLabel.size
+        
         let status = tasks[indexPath.row].value(forKeyPath: "statusTask") as! Bool // считываем статус таска
         cell.statusTask.layer.cornerRadius = 5 // закругление краев кнопки
         cell.statusTask.layer.borderWidth = 3.0 // толщина краев кнопки

@@ -28,17 +28,27 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         taskTextView.delegate = self
         taskTextView.tag = 1
         
-        taskNameLabel.layer.borderColor = UIColor.lightGray.cgColor
+        //        taskNameLabel.layer.borderColor = UIColor.lightGray.cgColor
         taskTextView.layer.borderColor = UIColor.lightGray.cgColor
-        taskNameTextView.layer.borderColor = UIColor.lightGray.cgColor
+        //        taskNameTextView.layer.borderColor = UIColor.lightGray.cgColor
         
-        taskNameLabel.layer.borderWidth = 3
-        taskTextView.layer.borderWidth = 3
-        taskNameTextView.layer.borderWidth = 3
+        //        taskNameLabel.layer.borderWidth = 3
+        taskTextView.layer.borderWidth = 1
+        //        taskNameTextView.layer.borderWidth = 1
         
-        taskNameLabel.layer.cornerRadius = 5
+        
+        //        taskNameLabel.layer.cornerRadius = 5
         taskTextView.layer.cornerRadius = 5
         taskNameTextView.layer.cornerRadius = 5
+        
+        
+        view.backgroundColor = .white
+        taskNameLabel.textColor = .black
+        taskTextView.backgroundColor = .white
+        taskNameTextView.backgroundColor = .white
+        taskTextView.textColor = .black
+        taskNameTextView.textColor = .black
+        
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil) // ремонт клавиатуры
@@ -53,8 +63,8 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         navigationController?.setToolbarHidden(false, animated: false)
         
         let tapper = UITapGestureRecognizer(target: self, action:#selector(endEditing))
-            tapper.cancelsTouchesInView = false
-            view.addGestureRecognizer(tapper)
+        tapper.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapper)
     }
     
     @objc func endEditing (_ sender: UITapGestureRecognizer) {
@@ -87,7 +97,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         let selectedRange = taskTextView.selectedRange
         taskTextView.scrollRangeToVisible(selectedRange)
     }
- 
+    
     
     @objc func hideAll() {
         guard view.isHidden == false else {return}
@@ -152,11 +162,21 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         present(ac, animated: true)
     }
     
-    
 }
 
 extension TaskViewController {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+}
+extension UITextView {
+    
+    func centerVertically() {
+        let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fittingSize)
+        let topOffset = (bounds.size.height - size.height * zoomScale) / 2
+        let positiveTopOffset = max(1, topOffset)
+        contentOffset.y = -positiveTopOffset
+    }
+    
 }
