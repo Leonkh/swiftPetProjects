@@ -12,6 +12,8 @@ private var tasks: [NSManagedObject] = [] // создаем массив наш�
 
 class ViewController: UITableViewController {
     
+    var firstTimeOpen: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,13 +32,21 @@ class ViewController: UITableViewController {
         }
         // Данные с Core Data загружены в массив tasks
         
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask)) // кнопка в Navigation Bar для добавления тасков
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil) // прячем view если окно приложения не активно
+        notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil) // вызывааем процедуру индентификации пользователя
         
-        completedTaskBottom()
+        completedTaskBottom() // сортируем список тасков
+        
+        if firstTimeOpen {
+            hideAll() // прячем view
+            openAll() // вызывааем процедуру индентификации
+            firstTimeOpen = false
+        }
+
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,7 +58,6 @@ class ViewController: UITableViewController {
         cell.nameOfTaskLabel.text = tasks[indexPath.row].value(forKeyPath: "nameOfTask") as! String // присваевыем текст в nameOfTasklabel равный сохраненному имени
         cell.taskTextLabel.text = tasks[indexPath.row].value(forKeyPath: "descriptionTask") as! String // присваевыем текст в taskTextlabel равный сохраненному описанию таска
         cell.nameOfTaskLabel.sizeToFit()
-//        cell.taskTextLabel.size
         
         let status = tasks[indexPath.row].value(forKeyPath: "statusTask") as! Bool // считываем статус таска
         cell.statusTask.layer.cornerRadius = 5 // закругление краев кнопки
@@ -116,7 +125,7 @@ class ViewController: UITableViewController {
         }
     }
     
-    @objc func changeStatus(sender: UIButton) {
+    @objc func changeStatus(sender: UIButton) { // функция визуального изменения состояния таска
         
         print(sender.tag)
         let numb = sender.tag
@@ -128,18 +137,18 @@ class ViewController: UITableViewController {
         completedTaskBottom()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { // выполнение методов перед появлением view на экране
         viewDidLoad()
         completedTaskBottom()
     }
     
-    @objc func hideAll() {
+    @objc func hideAll() { // прячем наш view
         guard view.isHidden == false else {return}
         view.isHidden = true
         title = "You must pass authentication"
     }
     
-    @objc func openAll() {
+    @objc func openAll() { // идентифицируем пользователя и в случае успеха открываем view
         guard view.isHidden == true else {return}
         let contex = LAContext() // объект LA. Error в LA это часть Obj-C, а не Swift
         var error: NSError?
@@ -168,20 +177,12 @@ class ViewController: UITableViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) { // убираем наблюдатели NC при переходе в другое view
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
     
-//    func taskComplete(indexTask: Int) {
-//        let completedTask = tasks[indexTask]
-//        tasks.remove(at: indexTask)
-//        tasks.append(completedTask)
-//        saveChages()
-//        tableView.reloadData()
-//    }
-    
-    func completedTaskBottom() {
+    func completedTaskBottom() { // сортируем выполненные таски в низ списка
         for task in tasks {
             if task.value(forKeyPath: "statusTask") as! Bool == true {
                 let swapTask = task
@@ -194,7 +195,7 @@ class ViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveChages() {
+    func saveChages() { // сохраняем изменения объектов Core Data
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext =
             appDelegate.persistentContainer.viewContext
@@ -203,8 +204,8 @@ class ViewController: UITableViewController {
             print("Данные сохранены")
         } catch {
             print("Cant save delete change")
+        }
     }
-}
 }
 
 

@@ -22,22 +22,18 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         if let task = task {
             taskNameTextView.text = task.value(forKeyPath: "nameOfTask") as! String
             taskTextView.text = task.value(forKeyPath: "descriptionTask") as! String
-        }
+        } // задаем значения текстовых полей
+        
         taskNameTextView.delegate = self
         taskNameTextView.tag = 0
         taskTextView.delegate = self
         taskTextView.tag = 1
         
-        //        taskNameLabel.layer.borderColor = UIColor.lightGray.cgColor
+        // далее визуальные правки
         taskTextView.layer.borderColor = UIColor.lightGray.cgColor
-        //        taskNameTextView.layer.borderColor = UIColor.lightGray.cgColor
         
-        //        taskNameLabel.layer.borderWidth = 3
         taskTextView.layer.borderWidth = 1
-        //        taskNameTextView.layer.borderWidth = 1
         
-        
-        //        taskNameLabel.layer.cornerRadius = 5
         taskTextView.layer.cornerRadius = 5
         taskNameTextView.layer.cornerRadius = 5
         
@@ -49,19 +45,21 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         taskTextView.textColor = .black
         taskNameTextView.textColor = .black
         
-        
+        // observers для состояния клавиатуры
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil) // ремонт клавиатуры
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil) // ремонт клавиатуры
         
+        // observers для состояния активности окна
         notificationCenter.addObserver(self, selector: #selector(hideAll), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(openAll), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-        
+        // добавляем на navigation bar кнопку "удалить"
         let deleteButtom = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target: self, action: #selector(deleteTask))
         toolbarItems = [deleteButtom]
         navigationController?.setToolbarHidden(false, animated: false)
         
+        // распознаем нажатие вне textView
         let tapper = UITapGestureRecognizer(target: self, action:#selector(endEditing))
         tapper.cancelsTouchesInView = false
         view.addGestureRecognizer(tapper)
@@ -72,7 +70,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         taskNameTextView.resignFirstResponder()
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) { // фиксируем изменения текста в textView
         switch textView.tag {
         case 0:
             task?.setValue(textView.text, forKeyPath: "nameOfTask")
@@ -81,7 +79,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    @objc func adjustForKeyboard(notification: Notification) {
+    @objc func adjustForKeyboard(notification: Notification) { // функция подстройки отображения view к клавиатуре
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
@@ -140,7 +138,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    @objc func deleteTask() {
+    @objc func deleteTask() { // функция удаления таска
         let ac = UIAlertController(title: "Do you want delete this task?", message: nil, preferredStyle: .alert)
         let yes = UIAlertAction(title: "Yes", style: .default, handler: {
             [weak self] _ in
@@ -164,19 +162,9 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
 }
 
-extension TaskViewController {
+extension TaskViewController { // расширения для этого view для скрытия клавиатуры при тапе вне textView
+    
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-}
-extension UITextView {
-    
-    func centerVertically() {
-        let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
-        let size = sizeThatFits(fittingSize)
-        let topOffset = (bounds.size.height - size.height * zoomScale) / 2
-        let positiveTopOffset = max(1, topOffset)
-        contentOffset.y = -positiveTopOffset
-    }
-    
 }

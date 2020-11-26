@@ -8,9 +8,7 @@
 import UIKit
 
 class TaskCell: UITableViewCell {
-    
-//    weak var delegate: CustomCellDelegate?
-    
+
     @IBOutlet var statusTask: UIButton!
     @IBOutlet var nameOfTaskLabel: UILabel!
     @IBOutlet var taskTextLabel: UILabel!
