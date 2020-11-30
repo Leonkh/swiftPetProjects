@@ -21,8 +21,8 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var searchBar: UISearchBar!
     
     lazy var tapRecognizer: UITapGestureRecognizer = {
-      var recognizer = UITapGestureRecognizer(target:self, action: #selector(dismissKeyboard))
-      return recognizer
+        var recognizer = UITapGestureRecognizer(target:self, action: #selector(dismissKeyboard))
+        return recognizer
     }()
     
     override func viewDidLoad() {
@@ -31,9 +31,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         apiKey = "4a4e219d6b73a256ed2379f35ecbaeb9"
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "mappin"), style: .plain, target: self, action: #selector(goToMap))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(goToMap))
-       
     }
     
     
@@ -50,20 +49,17 @@ class ViewController: UIViewController, UITextViewDelegate {
             case .success(let value):
                 let json = JSON(value)
                 self?.jsonData = json
-//                self?.textView.text = self?.jsonData?.description
                 print(self?.jsonData)
                 var hh = "" // достаем из данные из конструкции  "weather" : [
-//                {
-//                  "description" : "снег",
+                //                {
+                //                  "description" : "снег",
                 if let howWeather = self!.jsonData!["weather"].array {
-                for val in howWeather {
-                    if let description = val["description"].string {
-                        hh = description // получили снег
-//                        print("hh = \(hh)")
+                    for val in howWeather {
+                        if let description = val["description"].string {
+                            hh = description // получили снег
+                        }
                     }
                 }
-                }
-//                print("Массив имеет: \(howWeather["description"])")
                 self?.weatherParam = [
                     "Название города": self!.jsonData!["name"].stringValue,
                     "Температура в цельсиях": self!.jsonData!["main"]["temp"].stringValue,
@@ -73,7 +69,6 @@ class ViewController: UIViewController, UITextViewDelegate {
                     "Скорость ветра в м/с": self!.jsonData!["wind"]["speed"].stringValue,
                     "Влажность в %": self!.jsonData!["main"]["humidity"].stringValue
                 ]
-//                print(self?.weatherParam)
                 self?.textView.text = """
                     Название города:  \(self!.weatherParam["Название города"]!)
                     Температура: \(self!.weatherParam["Температура в цельсиях"]!) градусов цельсия
@@ -90,13 +85,13 @@ class ViewController: UIViewController, UITextViewDelegate {
                 
             case .failure(let error):
                 print(error)
-
+                
             }
         }
     }
     
     @objc func dismissKeyboard() {
-      searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     @objc func goToMap() {
@@ -115,23 +110,23 @@ class ViewController: UIViewController, UITextViewDelegate {
 }
 
 extension ViewController: UISearchBarDelegate {
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    dismissKeyboard()
-    
-    guard let searchText = searchBar.text, !searchText.isEmpty else {
-      return
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+        
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        cityName = searchText
+        guard let city = cityName else {return}
+        getWeatherInfo(cityName: city)
     }
-    cityName = searchText
-    guard let city = cityName else {return}
-    getWeatherInfo(cityName: city)
-  }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-      view.addGestureRecognizer(tapRecognizer)
+        view.addGestureRecognizer(tapRecognizer)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-      view.removeGestureRecognizer(tapRecognizer)
+        view.removeGestureRecognizer(tapRecognizer)
     }
 }
 

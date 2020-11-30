@@ -9,9 +9,8 @@ import MapKit
 import UIKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
-
+    
     @IBOutlet var mapView: MKMapView!
-//    let locationManager = CLLocationManager()
     
     var name: String?
     var latt: Double?
@@ -25,13 +24,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: initialLocation!, span: span)
-                mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
-            annotation.coordinate = initialLocation!
-            annotation.title = name
-//            annotation.subtitle = "London"
-            mapView.addAnnotation(annotation)
+        annotation.coordinate = initialLocation!
+        annotation.title = name
+        mapView.addAnnotation(annotation)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(changeMapType))
     }
